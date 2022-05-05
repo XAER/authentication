@@ -29,6 +29,7 @@ func SetupRouter() *gin.Engine {
 		v1.GET("/ping", controllers.PingHandler)
 		v1.POST("/register", controllers.RegisterHandler)
 		v1.POST("/login", controllers.LoginHandler)
+		v1.POST("/checkToken", controllers.CheckToken)
 	}
 
 	return r

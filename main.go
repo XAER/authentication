@@ -30,7 +30,11 @@ func initGinServer() {
 func main() {
 	initGinServer()
 
-	db := config.GetConnection()
+	db, err := config.GetConnection()
+	if err != nil {
+		log.Fatal(err.Error())
+		panic(err)
+	}
 
 	config.App = config.NewServices(router, &gCnf, db, gCnf.SERVER_ENV)
 

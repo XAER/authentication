@@ -3,13 +3,14 @@ package config
 import (
 	"authentication/helpers"
 	"fmt"
+	"log"
 
 	_ "github.com/go-sql-driver/mysql"
 	gorm_sql "gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
-func GetConnection() *gorm.DB {
+func GetConnection() (*gorm.DB, error) {
 	sql_host := helpers.GetEnv("MYSQL_HOST", "error")
 	sql_port := helpers.GetEnv("MYSQL_PORT", "3306")
 	sql_user := helpers.GetEnv("MYSQL_USER", "error")
@@ -23,8 +24,9 @@ func GetConnection() *gorm.DB {
 	db, err := gorm.Open(gorm_sql.Open(sqlConnectionString), &gorm.Config{})
 
 	if err != nil {
-		panic(err.Error())
+		log.Fatal(err.Error())
+		return nil, err
 	}
 
-	return db
+	return db, nil
 }
