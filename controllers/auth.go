@@ -54,7 +54,8 @@ func RegisterHandler(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"message": "User created!",
+		"message": "User created! Please login to activate your account.",
+		"status":  "ok",
 	})
 }
 
